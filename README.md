@@ -1,3 +1,3 @@
 # Random-Experiments
 
-a repository of random stuff I do
+a repository of holding samples of work attempted
