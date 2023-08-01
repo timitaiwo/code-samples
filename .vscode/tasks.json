@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "clang_cpp_build",
+			"command": "c:\\LLVM\\bin\\clang++.exe",
+			"args": [
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\cpp_binary\\cpp_clang_windows_binary.exe"
+			],
+			"options": {
+				"cwd": "c:\\LLVM\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: c:\\LLVM\\bin\\clang++.exe"
+		}
+	]
+}
