@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "xtree": "cpp"
+        "*.ino": "arduino-output",
+        "xtree": "cpp",
+        "xutility": "cpp"
     }
 }

@@ -77,7 +77,7 @@ bool determineVersionReq(string * const &firstArg) {
 }
 
 
-fourIntArray getWhitespaceLocs(string stockLine){
+fourIntArray getWhitespaceLocs( const string& stockLine){
     /*
     Accepts a string of stock data and 
     Returns an integer array holding the indexes of whitespaces in the string
