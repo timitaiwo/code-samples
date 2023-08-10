@@ -145,6 +145,10 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
             */
 
            std::regex rxStockName {"^[A-Z.]{6}"};
+           std::regex rxInterval {"(^[A-Z.]{6}\\s)\\d"};
+           std::regex rxVolTraded {""};
+           std::regex rxHigh {""};
+           std::regex rxLow {"[\\d.]*$"};
 
             // stockHoldingVar.stock_name = {};
             // stockHoldingVar.interval = {};
@@ -156,7 +160,7 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
         }
     };
 
-    // stockFrame.pop_back();      // added as the while loop above adds the last row twice
+    stockFrame.pop_back();      // added as the while loop above adds the last row twice
 
     return stockFrame;
 }
