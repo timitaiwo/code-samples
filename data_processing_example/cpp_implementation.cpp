@@ -145,7 +145,7 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
             */
 
            std::regex rxStockName {"^[A-Z.]{6}"};
-           std::regex rxInterval {"(^[A-Z.]{6}\\s)\\d"};
+           std::regex rxInterval {"(?!^[A-Z.]{6}\\s)\\d(?=\\s)"};
            std::regex rxVolTraded {""};
            std::regex rxHigh {""};
            std::regex rxLow {"[\\d.]*$"};
