@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <regex>
+
 #include <array>
 #include <vector>
 #include <set>
@@ -76,12 +78,12 @@ bool determineVersionReq(string * const &firstArg) {
     };
 }
 
-
-void getWhitespaceLocs( const string& stockLine, int[] whitespaceLocs) {
+/*
+void getWhitespaceLocs(string stockLine, const int * const & whitespaceLocs) {
     /*
     Accepts a string of stock data and 
     Returns an integer array holding the indexes of whitespaces in the string
-    */
+    *'/
 
     int whitespaceLocHolder {0};
     const int numCharsinLine = std::size(stockLine);
@@ -90,12 +92,12 @@ void getWhitespaceLocs( const string& stockLine, int[] whitespaceLocs) {
         char whitespace {' '};
         
         if (stockLine[i] == whitespace) {
-            whitespaceLocs[whitespaceLocHolder] = i;
+            *whitespaceLocs[whitespaceLocHolder] = i;
             whitespaceLocHolder += 1;
         };
     }
 
-    return whitespaceLocs;
+    // return whitespaceLocs;
 }
 
 
@@ -103,13 +105,15 @@ string getLineSubstring(string line, int firstPos, int lastPos) {
     /*
     This function retrieves information used to populate the StockRecord struct.
     It accepts a line of stock data and two indexes
-    */
+    *'/
 
     firstPos += 1;
     int numCharsAhead = lastPos - firstPos;
 
     return line.substr(firstPos, numCharsAhead);
 }
+
+*/
 
 
 std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
@@ -128,21 +132,31 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
         {
             std::getline(stockInfoFile, holdLine);    // Puts a line from the file into the holdLine string
             StockRecord stockHoldingVar {};
-            int whitespaceLoc[4] {};
-            getWhitespaceLocs(holdLine, &whitespaceLoc)
-            // fourIntArray whitespaceLoc {getWhitespaceLocs(holdLine)};   // Holds location of whitespaces
 
-            stockHoldingVar.stock_name = getLineSubstring(holdLine, -1, whitespaceLoc\[1\]-2);
+            /*
+            int whitespaceLoc[4] {};
+            getWhitespaceLocs(holdLine, &whitespaceLoc) // Holds location of whitespaces
+
+            stockHoldingVar.stock_name = getLineSubstring(holdLine, -1, whitespaceLoc[1]-2);
             stockHoldingVar.interval = stoi(getLineSubstring(holdLine, whitespaceLoc\[0\], whitespaceLoc\[1\]));
             stockHoldingVar.vol_traded = stod(getLineSubstring(holdLine, whitespaceLoc\[1\], whitespaceLoc\[2\]));
             stockHoldingVar.high = stod(getLineSubstring(holdLine, whitespaceLoc\[2\], whitespaceLoc\[3\]));
             stockHoldingVar.low = stod(getLineSubstring(holdLine, whitespaceLoc\[3\], holdLine.size() - whitespaceLoc\[3\]));
+            */
+
+           std::regex rxStockName {"^[A-Z.]{6}"};
+
+            // stockHoldingVar.stock_name = {};
+            // stockHoldingVar.interval = {};
+            // stockHoldingVar.vol_traded = {};
+            // stockHoldingVar.high = {};
+            // stockHoldingVar.low = {};
 
             stockFrame.push_back(stockHoldingVar);     // add StockRecord object to stockFrame
         }
     };
 
-    stockFrame.pop_back();      // added as the while loop above adds the last row twice
+    // stockFrame.pop_back();      // added as the while loop above adds the last row twice
 
     return stockFrame;
 }
@@ -192,6 +206,9 @@ int main(int argc, char* argv[])
     }
 
 
+    // for (auto stockRecord: )
+
+    /*
     // stdout [StockName],[Interval], [%Volume of the day during this interval]
     for (int i {0}; i < stockInfo.size(); ++i) {  
         auto Record = stockInfo[i];
