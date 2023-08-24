@@ -121,7 +121,8 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
 
             // std::cout << holdLine << std::endl;
 
-            // Add some data validation
+            // Add some data validation here in the future
+
             fourUnsignedIntArray whitespaceLoc = getWhitespaceLocs(holdLine);
 
             stockHoldingVar.stock_name = string{holdLine, 0, whitespaceLoc[0]};
