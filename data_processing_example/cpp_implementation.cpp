@@ -50,7 +50,7 @@ BT.LN,449.8,448.2
 #define DELIMITER "#"
 
 typedef std::string string;
-typedef std::array<int, 4> fourIntArray;
+typedef std::array<size_t, 4> fourUnsignedIntArray;
 
 
 struct StockRecord {
@@ -78,42 +78,28 @@ bool determineVersionReq(string * const &firstArg) {
     };
 }
 
-/*
-void getWhitespaceLocs(string stockLine, const int * const & whitespaceLocs) {
+
+auto getWhitespaceLocs(string stockLine) {
     /*
     Accepts a string of stock data and 
     Returns an integer array holding the indexes of whitespaces in the string
-    *'/
+    */
 
+    fourUnsignedIntArray whitespaceLocs = {};
     int whitespaceLocHolder {0};
     const int numCharsinLine = std::size(stockLine);
     
     for (int i {0}; i < numCharsinLine; ++i) {
         char whitespace {' '};
-        
+
         if (stockLine[i] == whitespace) {
-            *whitespaceLocs[whitespaceLocHolder] = i;
+            whitespaceLocs[whitespaceLocHolder] = i;
             whitespaceLocHolder += 1;
         };
     }
 
-    // return whitespaceLocs;
+    return whitespaceLocs;
 }
-
-
-string getLineSubstring(string line, int firstPos, int lastPos) {
-    /*
-    This function retrieves information used to populate the StockRecord struct.
-    It accepts a line of stock data and two indexes
-    *'/
-
-    firstPos += 1;
-    int numCharsAhead = lastPos - firstPos;
-
-    return line.substr(firstPos, numCharsAhead);
-}
-
-*/
 
 
 std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
@@ -133,30 +119,18 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
             std::getline(stockInfoFile, holdLine);    // Puts a line from the file into the holdLine string
             StockRecord stockHoldingVar {};
 
-            /*
-            int whitespaceLoc[4] {};
-            getWhitespaceLocs(holdLine, &whitespaceLoc) // Holds location of whitespaces
+            // std::cout << holdLine << std::endl;
 
-            stockHoldingVar.stock_name = getLineSubstring(holdLine, -1, whitespaceLoc[1]-2);
-            stockHoldingVar.interval = stoi(getLineSubstring(holdLine, whitespaceLoc\[0\], whitespaceLoc\[1\]));
-            stockHoldingVar.vol_traded = stod(getLineSubstring(holdLine, whitespaceLoc\[1\], whitespaceLoc\[2\]));
-            stockHoldingVar.high = stod(getLineSubstring(holdLine, whitespaceLoc\[2\], whitespaceLoc\[3\]));
-            stockHoldingVar.low = stod(getLineSubstring(holdLine, whitespaceLoc\[3\], holdLine.size() - whitespaceLoc\[3\]));
-            */
+            // Add some data validation
+            fourUnsignedIntArray whitespaceLoc = getWhitespaceLocs(holdLine);
 
-           std::regex rxStockName {"^[A-Z.]{6}"};
-           std::regex rxInterval {"(?!^[A-Z.]{6}\\s)\\d(?=\\s)"};
-           std::regex rxVolTraded {""};
-           std::regex rxHigh {""};
-           std::regex rxLow {"[\\d.]*$"};
+            stockHoldingVar.stock_name = string{holdLine, 0, whitespaceLoc[0]};
+            stockHoldingVar.interval = stoi(string{holdLine, whitespaceLoc[0], whitespaceLoc[1]});
+            stockHoldingVar.vol_traded = stod(string{holdLine, whitespaceLoc[1], whitespaceLoc[2]});
+            stockHoldingVar.high = stod(string{holdLine, whitespaceLoc[2], whitespaceLoc[3]});
+            stockHoldingVar.low = stod(string{holdLine, whitespaceLoc[3], holdLine.size() - whitespaceLoc[3]});
 
-            // stockHoldingVar.stock_name = {};
-            // stockHoldingVar.interval = {};
-            // stockHoldingVar.vol_traded = {};
-            // stockHoldingVar.high = {};
-            // stockHoldingVar.low = {};
-
-            stockFrame.push_back(stockHoldingVar);     // add StockRecord object to stockFrame
+            stockFrame.push_back(stockHoldingVar);
         }
     };
 
@@ -178,7 +152,7 @@ int main(int argc, char* argv[])
 
     bool versionRequested = determineVersionReq(&FirstArg);
     fileLoc = versionRequested ? argv[2] : argv[1];  // assigns 2nd arguement as flie location if version is requested else the 1st arguement is file loc
-    std::cout << "Reading file at: " << fileLoc << std::endl;
+    std::cout << "Reading file at: " << fileLoc << '\n' << std::endl;
 
     auto stockInfo = read_stocktrade_file(fileLoc);
 
@@ -186,7 +160,6 @@ int main(int argc, char* argv[])
     // std::vector<string> stockNames {};
 
     std::map<string, double> stockVolTradedTotal {};
-
     std::map<string, double> stockHigh {};
     std::map<string, double> stockLow {};
 
@@ -208,7 +181,6 @@ int main(int argc, char* argv[])
             stockLow[Record.stock_name] =  Record.low < stockLow[Record.stock_name] ?  Record.low : stockLow[Record.stock_name];
         }
     }
-
 
     // for (auto stockRecord: )
 
