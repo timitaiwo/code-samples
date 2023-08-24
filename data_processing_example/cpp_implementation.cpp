@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <cmath>
 
+
 // Future feature -> Add data validation checks notifying the user of empty lines & incorrect format
 
 typedef std::string string;
@@ -84,6 +85,7 @@ std::vector<StockRecord> read_stocktrade_file(string fileLocation) {
             StockRecord stockHoldingVar {};
 
             // Add some data validation here in the future
+            // Future feature -> Add data validation checks notifying the user of empty lines & incorrect format
 
             fourUnsignedIntArray whitespaceLoc = getWhitespaceLocs(holdLine);
 
