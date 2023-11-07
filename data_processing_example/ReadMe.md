@@ -1,7 +1,7 @@
 # Data Processing example
 Given an input file of the below structure: <br>
 
-_[stock_name] [trading_interval] [volume_traded] [High] [Low]_
+_[stock_name] [trading_interval] [volume_traded] [High] [Low]_ e.g <br> HDI.DF 1 700 448.48 125.47
 
 Return an output file of the below format. Note that the output could either be printed to terminal or stored in a file.
 

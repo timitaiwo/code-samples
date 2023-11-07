@@ -1,3 +1,3 @@
 # Random-Experiments
 
-a repository of holding samples of work attempted
+A repository holding a random sample of programming work done.
