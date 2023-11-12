@@ -48,5 +48,13 @@ def is_antisymmetric(relation:set[tuple]) -> bool:
                                                                              
 
 def is_transitive(relation, input_set):
-    pass
+    # Step 1: create a generator that outputs a set of three
+    # elements from input_set i.e {x, y, z} 
 
+    # Step 2: for each {x, y, z} test if (x, y), (y,z) and 
+    # (x, z) are in relation. If test fails return False else
+    # return 2
+
+    for element in input_set:
+
+        pass
