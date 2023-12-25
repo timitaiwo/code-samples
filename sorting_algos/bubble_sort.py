@@ -1,14 +1,11 @@
-arr:list = [3, 2, 4, 1, 5]
+from swap import *
+
+arr : list = [3, 2, 4, 1, 5]
 
 arr_sorted = False
 runs = 1
 
 print(f"run {runs}: The arr is {arr}")
-
-def swap(arr, current, next):
-    temp = arr[current]
-    arr[current] = arr[next]
-    arr[next] = temp
 
 while not arr_sorted:
     num_changes = 0
