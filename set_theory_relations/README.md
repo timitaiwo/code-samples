@@ -1,1 +1,0 @@
-This project writes functions that tests if a relation on a set is reflexive, symmetric, antisymmetric or transitive
