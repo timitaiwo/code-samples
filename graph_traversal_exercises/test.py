@@ -10,10 +10,12 @@ if __name__ == "__main__":
 
     print(number_nodes, '->', preq, '->', graph)
 
-    print(f'\nCheck if every node can be reached from {start_index}')
+    print(f"\nCheck if every node can be reached from {start_index}")
     
     print("\nUsing DFS: ")
-    print(dfs(graph, number_nodes, start_index))
+    DFS : bool = dfs(graph, number_nodes, start_index)
+    print(f"All nodes reached? {DFS}")
+
 
     print("\nUsing BFS: ")
     print(bfs(graph, number_nodes, start_index))
