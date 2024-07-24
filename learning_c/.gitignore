@@ -1,0 +1,12 @@
+# CMake artifacts
+CMakeFiles
+cmake_*
+CMakeCache.txt
+
+# 
+.ninja_*
+build.ninja
+
+
+build/*
+wordle
