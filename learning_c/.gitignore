@@ -3,9 +3,11 @@ CMakeFiles
 cmake_*
 CMakeCache.txt
 
-# 
+# Ninja artifacts
 .ninja_*
 build.ninja
 
+# Make artifacts
+Makefile
 
 build/*
